@@ -27,3 +27,9 @@ h1{
 #quotesListes p:nth-child(2) {
     @apply font-bold ml-auto w-fit text-green-950 italic 
 }
+#spinner{
+    @apply w-9/12 p-10 shadow-lg m-auto mb-4 rounded-lg 
+}
+#spinner .quote_loading{
+    @apply h-20 w-full bg-gray-200 rounded-md
+}

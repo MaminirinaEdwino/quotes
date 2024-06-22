@@ -3,36 +3,49 @@ import './assets/App.css'
 import SearchBar from './components/searchBar'
 import QuotesListe from './components/quotesList'
 import getQuotes from './api'
+import Spinner from './components/spinner'
 
 function App() {
   const [filter, setFilter] = useState()
   const [quotes, setQuotes] = useState([])
+  const [quotesSorona, setQuotesSorona] = useState([])
   const loading = quotes === undefined
 
   useEffect(() => {
-    getQuotes().then(result => setQuotes(result))
+    getQuotes().then(result => {
+      setQuotes(result)
+      setQuotesSorona(result)
+    })
 
   }, [])
-  let filtrer = []
-  const handleFilter = (e) => {
-    e.preventDefault()
-    filtrer = []
-    if (filter) {
-      for (let index = 0; index < quotes.length; index++) {
-        if (quotes[index].q.include(filter)) {
-          filtrer.push(quotes[index])
+
+  const handleFilter = () => {
+    //e.preventDefault()
+    if (filter == '') {
+      setQuotesSorona(quotes)
+    } else {
+      let filtrer = quotes.filter((quote) => {
+        let quo = quote.q.toLowerCase()
+        let fil = filter.toLowerCase()
+        if (quo.includes(fil)) {
+          return quote
         }
-      }
+      })
+      setQuotesSorona(filtrer)
     }
-    alert(filter)
   }
+  useEffect(() => {
+    handleFilter()
+
+
+  }, [filter])
 
   return (
     <>
       <h1>Quotes</h1>
-      <SearchBar disabled={loading} value={filter} onChange={setFilter} onClick={handleFilter}/>
+      <SearchBar disabled={loading} value={filter} onChange={setFilter} onClick={handleFilter} />
       {
-        loading ? 'loading' : < QuotesListe quotes={quotes} />
+        quotesSorona.length > 0 ? < QuotesListe quotes={quotesSorona} />: <Spinner/>
       }
     </>
   )
