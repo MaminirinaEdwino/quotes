@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1{
+    @apply font-bold text-center text-3xl m-5 ease-in-out
+}
+#searchBar{
+    @apply flex top-4 mb-8 w-1/2 m-auto sticky
+}
+
+#searchBar input{
+    @apply pt-2 pb-2 pl-4 pr-4 w-full h-12 rounded-3xl transition-shadow delay-200 shadow-lg 
+}
+#searchBar button{
+    @apply h-12 w-fit pl-4 pr-4 ml-2 rounded-3xl cursor-pointer bg-transparent delay-500 relative bg-blue-500 text-white
+}
+#quotesListes{
+    @apply flex flex-col items-center gap-4 w-9/12 m-auto
+}
+#quotesListes article{
+    @apply w-full p-8 rounded-lg shadow-lg bg-white
+}
+#quotesListes p:nth-child(1) {
+    @apply m-4 before:content-['']
+}
+#quotesListes p:nth-child(2) {
+    @apply font-bold ml-auto w-fit text-green-950 italic 
+}
